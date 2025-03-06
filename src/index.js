@@ -67,7 +67,7 @@ function Header() {
 function Menu() {
   return (
     <main className="menu">
-      <h2 >Menu</h2>
+      <h2>Menu</h2>
       <ul className="pizzas">
         {pizzaData.map((pizza) => (
           <li key={pizza.name}>
@@ -96,10 +96,11 @@ function Pizza({ pizza }) {
   return (
     <div className="pizza">
       <img src={pizza.photoName} alt={pizza.name} />
-      <h3>{pizza.name}</h3>
-      <p>{pizza.ingredients}</p>
-      <p>{pizza.price}</p>
-      {pizza.soldOut && <p>Sold Out</p>}
+      <div >
+        <h3>{pizza.name}</h3>
+        <p>{pizza.ingredients}</p>
+        <span >{pizza.soldOut ? "sold out!": pizza.price}</span>
+      </div>
     </div>
   );
 }
