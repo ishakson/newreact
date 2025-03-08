@@ -1,45 +1,47 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+
+// Pizza data
 const pizzaData = [
   {
     name: "Focaccia",
-    ingredients: "Bread with italian olive oil and rosemary",
+    ingredients: "Bread with Italian olive oil and rosemary",
     price: 6,
     photoName: "pizzas/focaccia.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Margherita",
-    ingredients: "Tomato and mozarella",
+    ingredients: "Tomato and mozzarella",
     price: 10,
     photoName: "pizzas/margherita.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Spinaci",
-    ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
+    ingredients: "Tomato, mozzarella, spinach, and ricotta cheese",
     price: 12,
     photoName: "pizzas/spinaci.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Funghi",
-    ingredients: "Tomato, mozarella, mushrooms, and onion",
+    ingredients: "Tomato, mozzarella, mushrooms, and onion",
     price: 12,
     photoName: "pizzas/funghi.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Salamino",
-    ingredients: "Tomato, mozarella, and pepperoni",
+    ingredients: "Tomato, mozzarella, and pepperoni",
     price: 15,
     photoName: "pizzas/salamino.jpg",
     soldOut: true,
   },
   {
     name: "Pizza Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
+    ingredients: "Tomato, mozzarella, ham, arugula, and burrata cheese",
     price: 18,
     photoName: "pizzas/prosciutto.jpg",
     soldOut: false,
@@ -56,6 +58,7 @@ function App() {
   );
 }
 
+// Header component
 function Header() {
   return (
     <header className="header">
@@ -64,21 +67,29 @@ function Header() {
   );
 }
 
+// Menu component
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Menu</h2>
       <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <li key={pizza.name}>
-            <Pizza pizza={pizza} />
-          </li>
-        ))}
+        {numPizzas > 0 ? (
+          pizzas.map((pizza, index) => (
+            <li key={pizza.name}>
+              <Pizza pizza={pizza} />
+            </li>
+          ))
+        ) : (
+          <p>No pizzas available</p>
+        )}
       </ul>
     </main>
   );
 }
 
+// Footer component with open/closed status
 function Footer() {
   const hour = new Date().getHours();
   const open = 9;
@@ -87,24 +98,33 @@ function Footer() {
 
   return (
     <footer className="footer">
-      We're currently {isOpen ? "open" : "closed"}.
+      {isOpen ? (
+        <div className="order">
+          <p>We are open for orders!</p>
+          <button className="btn">order</button>
+        </div>
+      ) : (
+        <p>We are closed for orders</p>
+      )}
     </footer>
   );
 }
 
+// Pizza component
 function Pizza({ pizza }) {
   return (
-    <div className="pizza">
-      <img src={pizza.photoName} alt={pizza.name} />
-      <div >
+    <div className={`pizza ${pizza.soldOut ? "sold-out" : ""}`}>
+      <img src={pizza.photoName} alt={` of ${pizza.name}`} />
+      <div>
         <h3>{pizza.name}</h3>
         <p>{pizza.ingredients}</p>
-        <span >{pizza.soldOut ? "sold out!": pizza.price}</span>
+        <span>{pizza.soldOut ? "Sold out!" : `$${pizza.price}`}</span>
       </div>
     </div>
   );
 }
 
+// Rendering the App component
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
