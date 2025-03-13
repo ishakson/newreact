@@ -1,99 +1,254 @@
-/* 
-const messages = [
-  "Learn React ⚛️",
-  "Apply for jobs 💼",
-  "Invest your new income 🤑",
-];
- */
 
- * {
-    box-sizing: border-box;
+
+@import url("https://fonts.googleapis.com/css2?family=Monoton&family=Quicksand:wght@500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2.4rem;
+  font-family: "Quicksand", sans-serif;
+  color: #5a3e2b;
+  font-weight: 500;
+  background-color: #f8f9fa;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  background-color: #f4a226;
+  font-family: "Monoton", cursive;
+  font-size: 8rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  word-spacing: 30px;
+  letter-spacing: -5px;
+  padding: 2.4rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #76c7ad, #e5771f, #f4a226);
+}
+
+.add-form {
+  background-color: #e5771f;
+  padding: 3.2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  margin-right: 1.6rem;
+  font-size: 2.4rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+button,
+select,
+input {
+  background-color: #ffebb3;
+  color: #5a3e2b;
+  font-family: inherit;
+  border: none;
+  border-radius: 10rem;
+  padding: 1.2rem 3.2rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button:hover,
+select:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active,
+select:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.add-form button {
+  text-transform: uppercase;
+  background-color: #76c7ad;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+input {
+  width: 25rem;
+}
+
+.list {
+  background-color: #5a3e2b;
+  color: #ffebb3;
+  padding: 4rem 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 3.2rem;
+  align-items: center;
+  overflow: auto;
+}
+
+.actions button,
+.list select {
+  text-transform: uppercase;
+  padding: 0.8rem 2.4rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.list ul {
+  list-style: none;
+  width: 80%;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.6rem;
+  justify-content: center;
+  align-content: start;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1.2rem 1.6rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+input[type="checkbox"] {
+  height: 2.4rem;
+  width: 2.4rem;
+  accent-color: #e5771f;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+input[type="checkbox"]:hover {
+  transform: scale(1.1);
+}
+
+.list li button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  padding: 0.8rem;
+  color: #f4a226;
+  margin-left: auto;
+  box-shadow: none;
+}
+
+.list li button:hover {
+  color: #ff3b30;
+  transform: scale(1.2);
+  box-shadow: none;
+}
+
+.stats {
+  background-color: #76c7ad;
+  text-align: center;
+  font-weight: 700;
+  padding: 3.2rem 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  html {
+    font-size: 55%;
   }
   
-  body {
-    font-family: sans-serif;
-    color: #333;
+  h1 {
+    font-size: 6rem;
+    word-spacing: 20px;
   }
   
-  .steps {
-    width: 600px;
-    background-color: #f7f7f7;
-    border-radius: 7px;
-    padding: 25px 100px;
-    margin: 100px auto;
+  .add-form {
+    flex-wrap: wrap;
+    padding: 2rem;
   }
   
-  .numbers {
-    display: flex;
-    justify-content: space-between;
+  .list ul {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 50%;
   }
   
-  .numbers > div {
-    height: 40px;
-    aspect-ratio: 1;
-    background-color: #e7e7e7;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
+  h1 {
+    font-size: 4.5rem;
+    word-spacing: 10px;
+    letter-spacing: -3px;
+  }
+  
+  .add-form {
+    gap: 1rem;
+  }
+  
+  input {
+    width: 18rem;
+  }
+  
+  .actions {
+    flex-wrap: wrap;
     justify-content: center;
-    font-size: 18px;
   }
-  
-  .numbers .active {
-    background-color: #7950f2;
-    color: #fff;
-  }
-  
-  .message {
-    text-align: center;
-    font-size: 20px;
-    margin: 40px 0;
-    font-weight: bold;
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .buttons button {
-    border: none;
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 100px;
-    font-size: 14px;
-    font-weight: bold;
-  
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .buttons button span {
-    font-size: 16px;
-    line-height: 1;
-  }
-  
-  h3 {
-    margin: 0;
-    text-transform: uppercase;
-  }
-  
-  .close {
-    /* position: absolute; */
-    top: 16px;
-    right: 16px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 40px;
-    color: inherit;
-  }
-  
-  .close:hover {
-    color: #7950f2;
-  }
+}

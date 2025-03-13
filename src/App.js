@@ -1,59 +1,78 @@
 import { useState } from "react";
-
-const messages = [
-  "Learn React ⚛️",
-  "Apply for jobs 💼",
-  "Invest your new income 🤑",
-];
 export default function App() {
   return (
-    <div className="App">
-      <Steps />
+    <div className="app">
+      <Logo />
+      <Form />
+      <PackingList />
+      <Stats />
     </div>
   );
 }
 
-function Steps() {
-  const [step, setStep] = useState(1);
-  const [isOpen, setIsOpen] = useState(true);
+function Logo() {
+  return <h1>🌍 Far Away 🌍</h1>;
+}
 
-  function handlePrevious() {
-    setStep((prevStep) => Math.max(1, prevStep - 1));
-  }
-  function handleNext() {
-    setStep((prevStep) => Math.min(3, prevStep + 1));
+function Form() {
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  function handleSubmit(event) {
+    event.preventDefault();
+    if(!description.trim()) return;
+
+    const newItem = { id: Date.now(), description, quantity, packed: false };
+    console.log(newItem);
+    setDescription("");
+    setQuantity(1);
   }
   return (
-    <>
-      <button className="close" onClick={() => setIsOpen((prev) => !prev)}>
-        {isOpen ? "\u00d7" : "\u002b"}
-      </button>
-      {isOpen && (
-        <div className="steps">
-          <div className="numbers">
-            <div className={step >= 1 ? "active" : ""}>1</div>
-            <div className={step >= 2 ? "active" : ""}>2</div>
-            <div className={step >= 3 ? "active" : ""}>3</div>
-          </div>
-          <p className="message">
-            Step {step}: {messages[step - 1]}
-          </p>
-          <div className="buttons">
-            <button
-              style={{ backgroundColor: "purple", color: "white" }}
-              onClick={handlePrevious}
-            >
-              Previous
-            </button>
-            <button
-              style={{ backgroundColor: "purple", color: "white" }}
-              onClick={handleNext}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
-    </>
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>What do you need for your trip?</h3>
+      <select value={quantity} onChange={(e) => setQuantity(+e.target.value)}>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option key={num} value={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input type="text" placeholder="Enter an item" value={description} onChange={(e) => setDescription(e.target.value)} />
+
+      <button>Add Item</button>
+    </form>
+  );
+}
+const initialItems = [
+  { id: 1, description: "Passports", quantity: 2, packed: true },
+  { id: 2, description: "Socks", quantity: 12, packed: false },
+];
+function PackingList() {
+  return (
+    <div className="list">
+      <ul>
+        {initialItems.map((item) => (
+          <Item key={item.id} item={item} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Item({ item }) {
+  return (
+    <li>
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+        {item.description} - {item.quantity}
+      </span>
+      <button>🗑️</button>
+    </li>
+  );
+}
+
+function Stats() {
+  return (
+    <footer className="stats">
+      <em>You have 3 items in your list. and you already packed 1 item.</em>
+    </footer>
   );
 }
